@@ -2,7 +2,7 @@
 
 Esta es una aplicación de consola desarrollada con Java, Hibernate, Spring y PostgreSQL que permite interactuar con una base de datos para realizar diversas operaciones relacionadas con libros y autores. La aplicación ofrece las siguientes funcionalidades:
 
-Búsqueda de libros por título: Consulta una API externa para obtener información de libros y registra los datos en la base de datos.
+Búsqueda de libros por título: Consulta una API externa (https://gutendex.com/ )para obtener información de libros y registra los datos en la base de datos.
 Listado de libros registrados: Muestra todos los libros almacenados en la base de datos.
 Listado de autores registrados: Muestra todos los autores registrados, con el apellido primero y el nombre después.
 Filtrado de libros por idioma: Permite filtrar los libros por idioma (Español o Inglés).
