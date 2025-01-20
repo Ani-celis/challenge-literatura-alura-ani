@@ -38,7 +38,7 @@ public class ClienteLiteratura {
                     	1.- Buscar libro por titulo
                     	2.- Lista libros registrados
                     	3.- Lista autores registrados
-                    	4.- Lista autores vivos en un determinado año
+                    	4.- Lista autores que estaban vivos en un año específico
                     	5.- Listar libros por idioma
                     	0 - Salir
                     """;
