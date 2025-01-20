@@ -1,0 +1,221 @@
+<html>
+<head>
+<title>ClienteLiteratura.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ClienteLiteratura.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">client</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Scanner</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">entity</span><span class="s2">.</span><span class="s1">AutorEntity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">entity</span><span class="s2">.</span><span class="s1">LibroEntity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">mapper</span><span class="s2">.</span><span class="s1">ConvierteDatos</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">model</span><span class="s2">.</span><span class="s1">Respuesta</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">repository</span><span class="s2">.</span><span class="s1">AutorRepository</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">repository</span><span class="s2">.</span><span class="s1">LibroRepository</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">challengeliteratura</span><span class="s2">.</span><span class="s1">service</span><span class="s2">.</span><span class="s1">ConsumoAPI</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ClienteLiteratura </span><span class="s2">{</span>
+
+    <span class="s0">private final </span><span class="s1">String URL_BASE </span><span class="s2">= </span><span class="s3">&quot;https://gutendex.com/books/?search=&quot;</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Scanner teclado </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">in</span><span class="s2">);</span>
+    <span class="s0">private </span><span class="s1">ConsumoAPI consumoApi </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ConsumoAPI</span><span class="s2">();</span>
+    <span class="s0">private </span><span class="s1">ConvierteDatos conversor </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ConvierteDatos</span><span class="s2">();</span>
+
+    <span class="s0">private </span><span class="s1">LibroRepository libroRepositorio</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">AutorRepository autorRepositorio</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">ClienteLiteratura</span><span class="s2">(</span><span class="s1">LibroRepository libroRepositorio</span><span class="s2">, </span><span class="s1">AutorRepository autorRepositorio</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">libroRepositorio </span><span class="s2">= </span><span class="s1">libroRepositorio</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">autorRepositorio </span><span class="s2">= </span><span class="s1">autorRepositorio</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">menu</span><span class="s2">() {</span>
+        <span class="s1">var opcion </span><span class="s2">= -</span><span class="s4">1</span><span class="s2">;</span>
+        <span class="s0">while </span><span class="s2">(</span><span class="s1">opcion </span><span class="s2">!= </span><span class="s4">0</span><span class="s2">) {</span>
+            <span class="s1">var menu </span><span class="s2">= </span><span class="s3">&quot;&quot;&quot; 
+                    Elija la opción a traves de su número: 
+                        1.- Buscar libro por titulo 
+                        2.- Lista liibros registrados 
+                        3.- Lista autores registrados 
+                        4.- Lista autores vivos en un determinado año 
+                        5.- Listar libros por idioma 
+                        0 - Salir 
+                        &quot;&quot;&quot;</span><span class="s2">;</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">menu</span><span class="s2">);</span>
+            <span class="s1">opcion </span><span class="s2">= </span><span class="s1">teclado</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">();</span>
+            <span class="s1">teclado</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+            <span class="s0">switch </span><span class="s2">(</span><span class="s1">opcion</span><span class="s2">) {</span>
+                <span class="s0">case </span><span class="s4">1</span><span class="s2">:</span>
+                    <span class="s1">buscarLibroWeb</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">2</span><span class="s2">:</span>
+                    <span class="s1">buscarLibros</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">3</span><span class="s2">:</span>
+                    <span class="s1">buscarAutores</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">4</span><span class="s2">:</span>
+                    <span class="s1">buscarAutoresVivo</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">5</span><span class="s2">:</span>
+                    <span class="s1">buscarPorIdiomas</span><span class="s2">();</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">0</span><span class="s2">:</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Adios, Vuelva Pronto...&quot;</span><span class="s2">);</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">default</span><span class="s2">:</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Opción inválida&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">buscarLibros</span><span class="s2">() {</span>
+
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">LibroEntity</span><span class="s2">&gt; </span><span class="s1">libros </span><span class="s2">= </span><span class="s1">libroRepositorio</span><span class="s2">.</span><span class="s1">findAll</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">libros</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">LibroEntity libro </span><span class="s2">: </span><span class="s1">libros</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n\n</span><span class="s3">---------- LIBROS -------</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Titulo: &quot; </span><span class="s2">+ </span><span class="s1">libro</span><span class="s2">.</span><span class="s1">getTitulo</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Autor: &quot; </span><span class="s2">+ </span><span class="s1">libro</span><span class="s2">.</span><span class="s1">getAutor</span><span class="s2">().</span><span class="s1">getNombre</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Idioma: &quot; </span><span class="s2">+ </span><span class="s1">libro</span><span class="s2">.</span><span class="s1">getLenguaje</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Descargas: &quot; </span><span class="s2">+ </span><span class="s1">libro</span><span class="s2">.</span><span class="s1">getDescargas</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">-------------------------</span><span class="s0">\n\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n\n </span><span class="s3">----- NO SE ENCONTRARON RESULTADOS ---- </span><span class="s0">\n\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">buscarAutores</span><span class="s2">() {</span>
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">AutorEntity</span><span class="s2">&gt; </span><span class="s1">autores </span><span class="s2">= </span><span class="s1">autorRepositorio</span><span class="s2">.</span><span class="s1">findAll</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">autores</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">AutorEntity autor </span><span class="s2">: </span><span class="s1">autores</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n\n</span><span class="s3">---------- Autores -------</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Nombre: &quot; </span><span class="s2">+ </span><span class="s1">autor</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Fecha de Nacimiento: &quot; </span><span class="s2">+ </span><span class="s1">autor</span><span class="s2">.</span><span class="s1">getFechaNacimiento</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Fecha de Fallecimiento: &quot; </span><span class="s2">+ </span><span class="s1">autor</span><span class="s2">.</span><span class="s1">getFechaFallecimiento</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Libros: &quot; </span><span class="s2">+ </span><span class="s1">autor</span><span class="s2">.</span><span class="s1">getLibros</span><span class="s2">().</span><span class="s1">getTitulo</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">-------------------------</span><span class="s0">\n\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n\n </span><span class="s3">----- NO SE ENCONTRARON RESULTADOS ---- </span><span class="s0">\n\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">buscarAutoresVivo</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Escriba el año para en el que vivio: &quot;</span><span class="s2">);</span>
+        <span class="s1">var anio </span><span class="s2">= </span><span class="s1">teclado</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">();</span>
+        <span class="s1">teclado</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">AutorEntity</span><span class="s2">&gt; </span><span class="s1">autores </span><span class="s2">= </span><span class="s1">autorRepositorio</span><span class="s2">.</span><span class="s1">findForYear</span><span class="s2">(</span><span class="s1">anio</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">autores</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">AutorEntity autor </span><span class="s2">: </span><span class="s1">autores</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n\n</span><span class="s3">---------- Autores Vivos -------</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Nombre: &quot; </span><span class="s2">+ </span><span class="s1">autor</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Fecha de nacimiento: &quot; </span><span class="s2">+ </span><span class="s1">autor</span><span class="s2">.</span><span class="s1">getFechaNacimiento</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Fecha de fallecimiento: &quot; </span><span class="s2">+ </span><span class="s1">autor</span><span class="s2">.</span><span class="s1">getFechaFallecimiento</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Libros: &quot; </span><span class="s2">+ </span><span class="s1">autor</span><span class="s2">.</span><span class="s1">getLibros</span><span class="s2">().</span><span class="s1">getTitulo</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">-------------------------</span><span class="s0">\n\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n\n </span><span class="s3">----- NO SE ENCONTRARON RESULTADOS ---- </span><span class="s0">\n\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">buscarPorIdiomas</span><span class="s2">() {</span>
+
+        <span class="s1">var menu </span><span class="s2">= </span><span class="s3">&quot;&quot;&quot; 
+                Seleccione un Idioma: 
+                    1.- Español 
+                    2.- Ingles 
+                 
+                    &quot;&quot;&quot;</span><span class="s2">;</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">menu</span><span class="s2">);</span>
+        <span class="s1">var idioma </span><span class="s2">= </span><span class="s1">teclado</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">();</span>
+        <span class="s1">teclado</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s1">String seleccion </span><span class="s2">= </span><span class="s3">&quot;&quot;</span><span class="s2">;</span>
+
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">idioma </span><span class="s2">== </span><span class="s4">1</span><span class="s2">) {</span>
+            <span class="s1">seleccion </span><span class="s2">= </span><span class="s3">&quot;es&quot;</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else 	if</span><span class="s2">(</span><span class="s1">idioma </span><span class="s2">== </span><span class="s4">2</span><span class="s2">) {</span>
+            <span class="s1">seleccion </span><span class="s2">= </span><span class="s3">&quot;en&quot;</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">LibroEntity</span><span class="s2">&gt; </span><span class="s1">libros </span><span class="s2">= </span><span class="s1">libroRepositorio</span><span class="s2">.</span><span class="s1">findForLanguaje</span><span class="s2">(</span><span class="s1">seleccion</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">libros</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">LibroEntity libro </span><span class="s2">: </span><span class="s1">libros</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n\n</span><span class="s3">---------- LIBROS POR IDIOMA-------</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Titulo: &quot; </span><span class="s2">+ </span><span class="s1">libro</span><span class="s2">.</span><span class="s1">getTitulo</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Autor: &quot; </span><span class="s2">+ </span><span class="s1">libro</span><span class="s2">.</span><span class="s1">getAutor</span><span class="s2">().</span><span class="s1">getNombre</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Idioma: &quot; </span><span class="s2">+ </span><span class="s1">libro</span><span class="s2">.</span><span class="s1">getLenguaje</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot; Descargas: &quot; </span><span class="s2">+ </span><span class="s1">libro</span><span class="s2">.</span><span class="s1">getDescargas</span><span class="s2">());</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">-------------------------</span><span class="s0">\n\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n\n </span><span class="s3">----- NO SE ENCONTRARON RESULTADOS ---- </span><span class="s0">\n\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">buscarLibroWeb</span><span class="s2">() {</span>
+        <span class="s1">Respuesta datos </span><span class="s2">= </span><span class="s1">getDatosSerie</span><span class="s2">();</span>
+
+        <span class="s0">if </span><span class="s2">(!</span><span class="s1">datos</span><span class="s2">.</span><span class="s1">results</span><span class="s2">().</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+
+            <span class="s1">LibroEntity libro </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LibroEntity</span><span class="s2">(</span><span class="s1">datos</span><span class="s2">.</span><span class="s1">results</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s4">0</span><span class="s2">));</span>
+            <span class="s1">libro </span><span class="s2">= </span><span class="s1">libroRepositorio</span><span class="s2">.</span><span class="s1">save</span><span class="s2">(</span><span class="s1">libro</span><span class="s2">);</span>
+
+        <span class="s2">}</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Datos: &quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">datos</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private </span><span class="s1">Respuesta getDatosSerie</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Ingresa el nombre del libro que deseas buscar: &quot;</span><span class="s2">);</span>
+        <span class="s1">var titulo </span><span class="s2">= </span><span class="s1">teclado</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+        <span class="s1">titulo </span><span class="s2">= </span><span class="s1">titulo</span><span class="s2">.</span><span class="s1">replace</span><span class="s2">(</span><span class="s3">&quot; &quot;</span><span class="s2">, </span><span class="s3">&quot;%20&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Titlulo : &quot; </span><span class="s2">+ </span><span class="s1">titulo</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">URL_BASE </span><span class="s2">+ </span><span class="s1">titulo</span><span class="s2">);</span>
+        <span class="s1">var json </span><span class="s2">= </span><span class="s1">consumoApi</span><span class="s2">.</span><span class="s1">obtenerDatos</span><span class="s2">(</span><span class="s1">URL_BASE </span><span class="s2">+ </span><span class="s1">titulo</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">json</span><span class="s2">);</span>
+        <span class="s1">Respuesta datos </span><span class="s2">= </span><span class="s1">conversor</span><span class="s2">.</span><span class="s1">obtenerDatos</span><span class="s2">(</span><span class="s1">json</span><span class="s2">, </span><span class="s1">Respuesta</span><span class="s2">.</span><span class="s0">class</span><span class="s2">);</span>
+        <span class="s0">return </span><span class="s1">datos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>
