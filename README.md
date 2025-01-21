@@ -31,8 +31,8 @@ Listar autores vivos en un año específico: Ingresa un año y la aplicación te
 ## Ejemplo de uso
 Ejemplo de uso
 1) Búsqueda de libros por título:
-   
-![image](https://github.com/user-attachments/assets/037abf08-68da-4b7e-99df-07ffb4474619)
+   ![Opcion-1](https://github.com/user-attachments/assets/07686a3d-76bf-4195-a301-eb20c5bf28a0)
+
 
 2) Listar libros registrados:
    
