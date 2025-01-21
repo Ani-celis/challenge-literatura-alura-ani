@@ -36,7 +36,8 @@ Ejemplo de uso
 
 2) Listar libros registrados:
    
-![image](https://github.com/user-attachments/assets/b8cbbd91-a064-49a1-975d-3ab48d18d631)
+![image](https://github.com/user-attachments/assets/945e55f3-6ed6-4e6d-89ed-d16a7b1b1d95)
+
 
 
 3) Listar autores registrados:
