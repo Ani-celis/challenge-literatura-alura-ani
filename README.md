@@ -36,35 +36,37 @@ Ejemplo de uso
 
 2) Listar libros registrados:
    
-![image](https://github.com/user-attachments/assets/945e55f3-6ed6-4e6d-89ed-d16a7b1b1d95)
-
+![image](https://github.com/user-attachments/assets/829b05d4-e1e2-4619-bc36-4160eb8dad68)
 
 
 3) Listar autores registrados:
    
-![image](https://github.com/user-attachments/assets/be17c3e4-066a-4829-bd5e-623a97d9dd8a)
+![image](https://github.com/user-attachments/assets/fa5ab897-45e7-464c-b9e9-700f74ef2853)
+
 
 
 4) Listar autores vivos en un año específico:
    
-![image](https://github.com/user-attachments/assets/87d56e80-c78a-4b8a-933c-887918f84823)
+![image](https://github.com/user-attachments/assets/5335d1c4-16f2-45cf-9270-d31c6f409a17)
+
 
   
 5) Filtrar libros por idioma:
-    
-![image](https://github.com/user-attachments/assets/8653111a-d716-4b37-abde-d22646b00174)
+    ![image](https://github.com/user-attachments/assets/630e47bb-4cd0-46fa-bfd1-0aac1bc0270a)
 
 
 Ejemplo de datos guardados en nuestra Base de Datos:
 
 1) Tabla libro:
    
-![image](https://github.com/user-attachments/assets/66d4703e-e5e5-49d3-b930-5fcf9ee76cf2)
+![image](https://github.com/user-attachments/assets/d6ed4a00-4596-4e1f-9e52-565df22224be)
+
 
 
 3) Tabla autor:
    
-![image](https://github.com/user-attachments/assets/88c25569-012c-41f7-b73a-9072f362ab82)
+![image](https://github.com/user-attachments/assets/0436e5ed-e783-46d0-9d0a-8c376f162e0d)
+
 
 
 
